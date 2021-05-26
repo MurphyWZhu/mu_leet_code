@@ -1,3 +1,6 @@
+mod lib;
+use lib::mu_leet_code::two_sum;
+
 fn main() {
-    println!("Hello, world!");
+    two_sum::Solution::two_sum_test();
 }
