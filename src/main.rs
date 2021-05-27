@@ -1,6 +1,6 @@
 mod lib;
-use lib::mu_leet_code::two_sum;
+use lib::mu_leet_code::length_of_longest_substring;
 
 fn main() {
-    two_sum::Solution::two_sum_test();
+    length_of_longest_substring::Solution::length_of_longest_substring_test();
 }
