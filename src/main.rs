@@ -1,6 +1,6 @@
 mod lib;
-use lib::mu_leet_code::length_of_longest_substring;
+use lib::mu_leet_code::median_of_two_sorted_arrays::Solution;
 
 fn main() {
-    length_of_longest_substring::Solution::length_of_longest_substring_test();
+    Solution::find_median_sorted_arrays_test();
 }

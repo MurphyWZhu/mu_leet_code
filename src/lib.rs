@@ -23,7 +23,7 @@ pub mod mu_leet_code {
             pub fn two_sum_test() {
                 let nums = vec![2, 7, 11, 15];
                 let target = 9;
-                let result = super::two_sum::Solution::two_sum(nums, target);
+                let result = self::Solution::two_sum(nums, target);
                 println!("{:?}", result)
             }
         }
@@ -61,7 +61,65 @@ pub mod mu_leet_code {
             }
             pub fn length_of_longest_substring_test() {
                 let s = " ".to_string();
-                println!("{}", super::length_of_longest_substring::Solution::length_of_longest_substring(s));
+                println!("{}", self::Solution::length_of_longest_substring(s));
+            }
+        }
+    }
+
+    pub mod median_of_two_sorted_arrays {
+        //给定两个大小分别为m和n的正序（从小到大）数组nums1和nums2。请你找出并返回这两个正序数组的中位数 。
+        pub struct Solution {}
+
+        impl Solution {
+            pub fn find_median_sorted_arrays(nums1: Vec<i32>, nums2: Vec<i32>) -> f64 {
+                let mut tmp = vec![0, 0];
+                let (nums1_len, nums2_len) = (nums1.len(), nums2.len());
+                let median = (nums1_len + nums2_len) / 2;
+                let (mut p1, mut p2): (usize, usize) = (0, 0);
+                for i in 0..median + 1 {
+                    match nums1.get(p1) {
+                        Some(n1) => {
+                            match nums2.get(p2) {
+                                Some(n2) => {
+                                    if n2 > n1 {
+                                        tmp.push(n1.clone());
+                                        tmp.remove(0);
+                                        p1 += 1;
+                                    } else {
+                                        tmp.push(n2.clone());
+                                        tmp.remove(0);
+                                        p2 += 1;
+                                    }
+                                }
+                                None => {
+                                    tmp.push(n1.clone());
+                                    tmp.remove(0);
+                                    p1 += 1;
+                                }
+                            }
+                        }
+                        None => {
+                            match nums2.get(p2) {
+                                Some(n2) => {
+                                    tmp.push(n2.clone());
+                                    tmp.remove(0);
+                                    p2 += 1;
+                                }
+                                None => return 0.0
+                            }
+                        }
+                    }
+                }
+                if (nums1_len + nums2_len) % 2 != 0 {
+                    tmp[1] as f64
+                } else {
+                    (tmp[0] as f64 + tmp[1] as f64) / 2.0
+                }
+            }
+            pub fn find_median_sorted_arrays_test() {
+                let nums1 = vec![1, 3];
+                let nums2 = vec![2];
+                println!("{}", self::Solution::find_median_sorted_arrays(nums1, nums2));
             }
         }
     }
